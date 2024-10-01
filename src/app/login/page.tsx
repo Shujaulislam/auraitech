@@ -10,11 +10,16 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await signIn("credentials", {
+    const result = await signIn("credentials", {
       username: userInfo.username,
       password: userInfo.password,
-      callbackUrl: "/dashboard",
+      redirect: false,
     });
+    if (result?.error) {
+      console.error(result.error);
+    } else {
+      window.location.href = "/dashboard";
+    }
   };
 
   return (

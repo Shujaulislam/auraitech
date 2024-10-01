@@ -10,8 +10,9 @@ import FilePreview from "@/components/FilePreview";
 
 export default function DashboardPage() {
   const [file, setFile] = useState<File | null>(null);
+  
   const { data: session } = useSession();
-
+  console.log(session);
   const handleUpload = async () => {
     if (!file) return;
 

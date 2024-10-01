@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import multer from "multer";
+// import multer from "multer";
 import { promises as fs } from "fs";
 import path from "path";
 import sharp from "sharp";
 
-const upload = multer({ dest: "uploads/" });
+// const upload = multer({ dest: "uploads/" });
 
 export const POST = async (req: Request) => {
   const formData = await req.formData();

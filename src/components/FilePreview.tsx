@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface FilePreviewProps {
   file: File | null;
@@ -36,10 +37,13 @@ export default function FilePreview({ file }: FilePreviewProps) {
   switch (fileType) {
     case "image":
       return (
-        <img
-          src={previewUrl || undefined}
+        <Image
+          src={previewUrl || ""}
           alt="Preview"
+          width={500}
+          height={300}
           className="max-w-full h-auto rounded shadow"
+          objectFit="contain"
         />
       );
     case "video":

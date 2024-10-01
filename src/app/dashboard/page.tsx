@@ -1,5 +1,3 @@
-// app/dashboard/page.tsx
-
 "use client";
 
 import { useState } from "react";
@@ -10,7 +8,9 @@ import FilePreview from "@/components/FilePreview";
 
 export default function DashboardPage() {
   const [file, setFile] = useState<File | null>(null);
-  
+  const [width, setWidth] = useState(800);
+  const [height, setHeight] = useState(600);
+
   const { data: session } = useSession();
   console.log(session);
   const handleUpload = async () => {
@@ -18,6 +18,8 @@ export default function DashboardPage() {
 
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("width", width.toString());
+    formData.append("height", height.toString());
 
     const res = await fetch("/api/upload", {
       method: "POST",
@@ -46,7 +48,7 @@ export default function DashboardPage() {
           Logout
         </button>
       </div>
-      <FileUpload setFile={setFile} />
+      <FileUpload setFile={setFile} setWidth={setWidth} setHeight={setHeight} />
       <FilePreview file={file} />
       {file && (
         <button

@@ -1,4 +1,3 @@
-// app/api/upload/route.ts
 
 import { NextResponse } from "next/server";
 import multer from "multer";

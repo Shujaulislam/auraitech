@@ -1,4 +1,3 @@
-
 import { NextResponse } from "next/server";
 import multer from "multer";
 import { promises as fs } from "fs";
@@ -10,6 +9,8 @@ const upload = multer({ dest: "uploads/" });
 export const POST = async (req: Request) => {
   const formData = await req.formData();
   const file = formData.get("file") as File;
+  const width = Number(formData.get("width"));
+  const height = Number(formData.get("height"));
 
   if (!file) {
     return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
@@ -29,7 +30,7 @@ export const POST = async (req: Request) => {
     const manipulatedPath = path.join(uploadsDir, `edited-${file.name}`);
 
     await sharp(buffer)
-      .resize(800, 600, { fit: "inside" })
+      .resize(width, height, { fit: "inside" })
       .toFile(manipulatedPath);
 
     return NextResponse.json({
